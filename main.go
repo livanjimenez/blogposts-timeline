@@ -1,9 +1,14 @@
 package main
 
 import (
-	_ "github.com/lib/pq"
+	"github.com/gin-gonic/gin"
+	"github.com/livanjimenez/blogposts-timeline/cmd"
+	"github.com/livanjimenez/blogposts-timeline/internal/db"
 )
 
-
-
-func main() {}
+func main() {
+	r := gin.Default()
+	db.Connect()
+	r.POST("/posts", cmd.CreatePostHandler)
+	r.Run()
+}
